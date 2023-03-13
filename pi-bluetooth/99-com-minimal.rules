@@ -1,0 +1,35 @@
+# Extracted from https://github.com/RPi-Distro/raspberrypi-sys-mods/blob/e44e4546a786dae68a053b822d5af14b2eea99b4/etc.armhf/udev/rules.d/99-com.rules
+KERNEL=="ttyAMA0", PROGRAM="/bin/sh -c '\
+	ALIASES=/proc/device-tree/aliases; \
+	if cmp -s $$ALIASES/uart0 $$ALIASES/serial0; then \
+		echo 0;\
+	elif cmp -s $$ALIASES/uart0 $$ALIASES/serial1; then \
+		echo 1; \
+	else \
+		exit 1; \
+	fi\
+'", SYMLINK+="serial%c"
+
+KERNEL=="ttyAMA1", PROGRAM="/bin/sh -c '\
+	ALIASES=/proc/device-tree/aliases; \
+	if [ -e /dev/ttyAMA0 ]; then \
+		exit 1; \
+	elif cmp -s $$ALIASES/uart0 $$ALIASES/serial0; then \
+		echo 0;\
+	elif cmp -s $$ALIASES/uart0 $$ALIASES/serial1; then \
+		echo 1; \
+	else \
+		exit 1; \
+	fi\
+'", SYMLINK+="serial%c"
+
+KERNEL=="ttyS0", PROGRAM="/bin/sh -c '\
+	ALIASES=/proc/device-tree/aliases; \
+	if cmp -s $$ALIASES/uart1 $$ALIASES/serial0; then \
+		echo 0; \
+	elif cmp -s $$ALIASES/uart1 $$ALIASES/serial1; then \
+		echo 1; \
+	else \
+		exit 1; \
+	fi \
+'", SYMLINK+="serial%c"
