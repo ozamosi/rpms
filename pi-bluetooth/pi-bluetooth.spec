@@ -1,8 +1,8 @@
 Name:           pi-bluetooth
 Version:        0.1.19
-Release:        6%{?dist}
+Release:        5%{?dist}
 Summary:        Bluetooth support for raspberry pies
-BuildArch:      noarch
+
 License:        BSD-3-Clause
 URL:            https://github.com/RPi-Distro/pi-bluetooth
 Source0:        https://github.com/RPi-Distro/pi-bluetooth/archive/87248a382d1a81b80a62730975135d87fffd7ef1.zip
@@ -51,20 +51,13 @@ systemctl enable hciuart.service
 
 
 %changelog
-* Tue Mar 14 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-5
-- Set noarch. There's no real reason you couldn't use it on armv7
-
 * Mon Mar 13 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-5
 - Explicitly enable hciuart.service - it doesn't work otherwise
-
 * Mon Mar 13 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-4
 - Fix name of bthelper service
-
 * Mon Mar 13 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-3
 - Install hciuart.service properly - it required manually starting before
-
 * Sat Mar 04 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-2
 - Add bluez-deprecated dependency - the shell scripts depend on it
-
 * Sat Mar 04 2023 Robin Sonefors <robin@sonefors.net> - 0.1.19-1
 - First packaged version
